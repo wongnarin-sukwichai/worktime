@@ -4,7 +4,7 @@ namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use App\Models\User;
+use App\Models\Member;
 
 class MemberController extends Controller
 {
@@ -13,7 +13,7 @@ class MemberController extends Controller
      */
     public function index()
     {
-        $data = User::select('uid', 'name', 'surname', 'dep')->get();
+        $data = Member::select('uid', 'name', 'surname', 'dep')->get();
         return response()->json($data);
     }
 

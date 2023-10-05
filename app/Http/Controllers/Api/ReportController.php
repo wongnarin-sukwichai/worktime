@@ -8,8 +8,8 @@ use Illuminate\Support\Facades\DB;
 
 use App\Models\Checkin;
 use App\Models\Checkout;
-use App\Models\User;
 use Carbon\Carbon;
+use App\Models\Member;
 
 class ReportController extends Controller
 {
@@ -34,14 +34,14 @@ class ReportController extends Controller
         $i = 0;
         $arr = [];
 
-        $user = User::select('uid', 'name', 'surname', 'dep')
+        $member = Member::select('uid', 'name', 'surname', 'dep')
             ->orderBy('dep', 'ASC')
             ->get();
 
         $cin = Checkin::where('dat', $request['selected'])->get();
         $cout = Checkout::where('dat', $request['selected'])->get();
 
-        foreach ($user as $r) {
+        foreach ($member as $r) {
             $arr[$i]['uid'] = $r->uid;
             $arr[$i]['name'] = $r->name;
             $arr[$i]['surname'] = $r->surname;
@@ -87,7 +87,7 @@ class ReportController extends Controller
 
     public function member()
     {
-        $data = User::all();
+        $data = Member::all();
         dd($data);
         return response()->json($data);
     }
@@ -127,7 +127,7 @@ class ReportController extends Controller
         $i = 1;
         $arr = [];
 
-        $user = User::where('uid', $request['uid'])->first();
+        $member = Member::where('uid', $request['uid'])->first();
 
         $cin = Checkin::where('uid', $request['uid'])
             ->where('m', $m)
@@ -139,8 +139,8 @@ class ReportController extends Controller
 
         for ($i; $i <= $total; $i++) {
 
-            $arr[$i]['name'] = $user->name;
-            $arr[$i]['surname'] = $user->surname;
+            $arr[$i]['name'] = $member->name;
+            $arr[$i]['surname'] = $member->surname;
             $arr[$i]['dat'] = $y . '-' . $m . '-' . $i;
             $arr[$i]['m'] = $m;
             $arr[$i]['y'] = $y;

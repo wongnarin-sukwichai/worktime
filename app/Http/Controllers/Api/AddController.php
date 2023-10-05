@@ -10,6 +10,7 @@ use App\Models\User;
 use Carbon\Carbon;
 use App\Models\Checkin;
 use App\Models\Checkout;
+use App\Models\Member;
 
 class AddController extends Controller
 {
@@ -111,7 +112,7 @@ class AddController extends Controller
 
     public function showname(string $uid)
     {
-        $data = User::where('uid', $uid)->first();
+        $data = Member::where('uid', $uid)->first();
 
         return response()->json($data);
     }

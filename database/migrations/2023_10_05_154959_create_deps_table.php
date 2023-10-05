@@ -11,13 +11,12 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('admin_systems', function (Blueprint $table) {
+        Schema::create('deps', function (Blueprint $table) {
             $table->id();
-            $table->string('username');
-            $table->string('uid');
-            $table->string('name');
-            $table->string('surname');
-            $table->string('system');
+            $table->string('dep_title');
+            $table->integer('dep_group');
+            $table->string('user_1')->nullable();
+            $table->string('user_2')->nullable();
             $table->timestamps();
         });
     }
@@ -27,6 +26,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('admin_systems');
+        Schema::dropIfExists('deps');
     }
 };

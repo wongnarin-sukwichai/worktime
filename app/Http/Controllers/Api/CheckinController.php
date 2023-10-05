@@ -7,9 +7,9 @@ use Illuminate\Http\Request;
 
 use Carbon\Carbon;
 
-use App\Models\User;
 use App\Models\Checkin;
 use App\Models\Checkout;
+use App\Models\Member;
 
 class CheckinController extends Controller
 {
@@ -46,7 +46,7 @@ class CheckinController extends Controller
         $d = $now->format('d');
         $time = $now->format('H:i:s');
 
-        $res = User::where('uid', $request['uid'])->first();
+        $res = Member::where('uid', $request['uid'])->first();
 
         if (empty($res)) {
 
@@ -90,7 +90,7 @@ class CheckinController extends Controller
         $d = $now->format('d');
         $time = $now->format('H:i:s');
 
-        $res = User::where('uid', $request['uid'])->first();
+        $res = Member::where('uid', $request['uid'])->first();
 
         $data = new Checkout();
 
