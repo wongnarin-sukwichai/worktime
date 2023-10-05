@@ -65,7 +65,7 @@ import Swal from "sweetalert2";
 export default {
     data() {
         return {
-            logo: "http://127.0.0.1:8000/img/library.png",
+            logo: "/img/library.png",
             auth: {
                 email: "",
                 password: "",

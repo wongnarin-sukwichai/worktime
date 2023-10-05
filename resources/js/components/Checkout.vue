@@ -97,7 +97,7 @@ export default {
     },
     data() {
         return {
-            image: "http://localhost/worktime/public/img/library.jpg",
+            image: "/img/library.jpg",
             formData: "",
             imageCapture: "",
             record: {

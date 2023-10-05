@@ -5,9 +5,10 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <title>Laravel</title>
+    <title>ระบบลงเวลาปฏิบัติงาน | AREC MSU</title>
 
     <!-- Fonts -->
+    <link rel="icon" href="{{ url('img/favicon.jpg') }}">
     <link href="https://fonts.googleapis.com/css?family=Prompt|Sarabun" rel="stylesheet">
 
     @vite(['resources/css/app.css', 'resources/js/app.js'])
