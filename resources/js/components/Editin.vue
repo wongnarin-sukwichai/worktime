@@ -40,7 +40,7 @@
                 </tr>
                 <tr class="border-b">
                     <td class="p-4 border-r text-left">ชื่อ-นามสกุล</td>
-                    <td class="p-4 text-left">{{ this.name }}</td>
+                    <td class="p-4 text-left">{{ this.name }} {{ this.surname }}</td>
                 </tr>
                 <tr class="border-b">
                     <td class="p-4 border-r text-left">วันที่</td>
@@ -82,6 +82,7 @@ export default {
             path: "/storage/img",
             pic: "",
             name: "",
+            surname: "",
             dat: "",
             y: "",
             m: "",
@@ -99,6 +100,7 @@ export default {
                 .then((response) => {
                     this.pic = response.data.pic;
                     this.name = response.data.name;
+                    this.surname = response.data.surname;
                     this.dat = response.data.dat;
                     this.y = response.data.y;
                     this.m = response.data.m;

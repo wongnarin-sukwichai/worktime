@@ -34,6 +34,17 @@
                                 ></box-icon>
                                 <p class="p-1">รายบุคคล</p></router-link
                             >
+                            <router-link
+                                to="/record"
+                                class="flex p-2 rounded-lg hover:bg-gray-100 hover:text-gray-700"
+                                ><box-icon
+                                    name="table"
+                                    color="gray"
+                                    size="sm"
+                                    class="pr-2"
+                                ></box-icon>
+                                <p class="p-1">รายงานการแก้ไข</p></router-link
+                            >
                         </div>
                     </div>
                     <div class="space-y-2">

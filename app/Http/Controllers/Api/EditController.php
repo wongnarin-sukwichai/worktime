@@ -7,6 +7,8 @@ use Illuminate\Http\Request;
 
 use App\Models\Checkin;
 use App\Models\Checkout;
+use App\Models\Record;
+use Illuminate\Support\Facades\Auth;
 
 class EditController extends Controller
 {
@@ -78,6 +80,29 @@ class EditController extends Controller
         ]);
 
         $data = Checkin::find($request['id']);
+
+        // บันทึกลง table Record ก่อน
+        $res = new Record();
+        $res->ref_id = $request['id'];
+        $res->type = 1;
+        $res->created_by = Auth::user()->name . ' ' . Auth::user()->surname;
+        $res->uid = $data->uid;
+        $res->pic = $data->pic;
+        $res->name = $data->name;
+        $res->surname = $data->surname;
+        $res->local = $data->local;
+        $res->dat = $data->dat;
+        $res->d = $data->d;
+        $res->m = $data->m;
+        $res->y = $data->y;
+        $res->timetype = 'เข้างาน';
+        $res->timeold = $data->timein;
+        $res->timenew = $request['timein'];
+
+        $res->save();
+
+
+        // update ข้อมูล
         $data->timein = $request['timein'];
         $data->update();
 
@@ -93,6 +118,29 @@ class EditController extends Controller
         ]);
 
         $data = Checkout::find($request['id']);
+
+        // บันทึกลง table Record ก่อน
+        $res = new Record();
+        $res->ref_id = $request['id'];
+        $res->type = 2;
+        $res->created_by = Auth::user()->name . ' ' . Auth::user()->surname;
+        $res->uid = $data->uid;
+        $res->pic = $data->pic;
+        $res->name = $data->name;
+        $res->surname = $data->surname;
+        $res->local = $data->local;
+        $res->dat = $data->dat;
+        $res->d = $data->d;
+        $res->m = $data->m;
+        $res->y = $data->y;
+        $res->timetype = 'ออกงาน';
+        $res->timeold = $data->timeout;
+        $res->timenew = $request['timeout'];
+
+        $res->save();
+
+
+        // update ข้อมูล
         $data->timeout = $request['timeout'];
         $data->update();
 

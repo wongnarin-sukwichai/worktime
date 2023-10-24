@@ -1,6 +1,6 @@
 import { createRouter, createWebHistory } from "vue-router";
 
-import Welcome from "../components/Welcome.vue";
+// import Welcome from "../components/Welcome.vue";
 import Checkout from "../components/Checkout.vue";
 import Login from "../components/Login.vue";
 import Home from "../components/Home.vue";
@@ -10,15 +10,16 @@ import Editout from "../components/Editout.vue";
 import Member from "../components/Member.vue";
 import Addin from "../components/AddIn.vue";
 import Addout from "../components/AddIOut.vue";
+import Record from "../components/Record.vue";
 
 import store from "../store";
 
 const routes = [
-    {
-        path: "/",
-        name: "welcome",
-        component: Welcome,
-    },
+    // {
+    //     path: "/",
+    //     name: "welcome",
+    //     component: Welcome,
+    // },
     {
         path: "/checkout",
         name: "checkout",
@@ -87,6 +88,14 @@ const routes = [
             path: "/addout/:uid/:dat",
             name: "addtout",
             component: Addout,
+            meta: {
+                guard: "auth"
+            }
+        },
+        {
+            path: "/record",
+            name: "record",
+            component: Record,
             meta: {
                 guard: "auth"
             }

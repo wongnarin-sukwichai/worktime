@@ -19,18 +19,34 @@
 
     <div id="app"></div>
 
-    <div id="clock" class="flex justify-center digital_clock_wrapper mt-8">
+    <div class="app-main__outer">
+        <div class="app-main__inner">
+            <div class="flex-center position-ref full-height">
+                <div class="message text-center" style="padding-top: 20%;">
+                    <a href="/login">
+                        <h5 class="text-gray-400 text-4xl hover:text-blue-400 cursor-pointer">Welcome to Worktime
+                            System</h5>
+                    </a><br>
+                    <h6 class="text-gray-300">Academic Resource Center MSU</h6>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    {{-- Client --}}
+    {{-- <div id="clock" class="flex justify-center digital_clock_wrapper mt-8">
         <div class="row rounded border-x-4 border-gray-300 px-8">
             <div id="digit_clock_time" class="text-center text-xl"></div>
             <div id="digit_clock_date"></div>
         </div>
     </div>
 
-    <div id="screenshots"></div>
+    <div id="screenshots"></div> --}}
 
 </body>
 
-<script type="text/javascript">
+{{-- <script type="text/javascript">
 
     /** Clock **/
     function currentTime() {
@@ -71,6 +87,6 @@
 
     currentTime();
 
-</script>
+</script> --}}
 
 </html>
