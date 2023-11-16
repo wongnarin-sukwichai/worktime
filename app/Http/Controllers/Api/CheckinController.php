@@ -68,7 +68,7 @@ class CheckinController extends Controller
             $data->m = $m;
             $data->y = $y;
             $data->timein = $time;
-            $data->other = null;
+            $data->otherin = null;
             $data->created = null;
 
             $data->save();
@@ -105,7 +105,7 @@ class CheckinController extends Controller
         $data->m = $m;
         $data->y = $y;
         $data->timeout = $time;
-        $data->other = null;
+        $data->otherout = null;
         $data->created = null;
 
         $data->save();

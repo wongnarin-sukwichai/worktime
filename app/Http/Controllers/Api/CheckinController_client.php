@@ -68,6 +68,7 @@ class CheckinController extends Controller
             $data->m = $m;
             $data->y = $y;
             $data->timein = $time;
+            $data->otherin = null;
             $data->created = null;
 
             $data->save();
@@ -83,6 +84,7 @@ class CheckinController extends Controller
                 'm' => $m,
                 'y' => $y,
                 'timein' => $time,
+                'otherin' => null,
                 'created' => null
             ]);
         }
@@ -125,6 +127,7 @@ class CheckinController extends Controller
             $data->m = $m;
             $data->y = $y;
             $data->timeout = $time;
+            $data->otherout = null;
             $data->created = null;
 
             $data->save();
@@ -140,6 +143,7 @@ class CheckinController extends Controller
                 'm' => $m,
                 'y' => $y,
                 'timeout' => $time,
+                'otherout' => null,
                 'created' => null
             ]);
         }
