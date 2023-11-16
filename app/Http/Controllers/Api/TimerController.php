@@ -4,17 +4,16 @@ namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use App\Models\Timer;
 
-use App\Models\Record;
-
-class RecordController extends Controller
+class TimerController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
-        $data = Record::orderBy('id', 'DESC')->paginate(5);
+        $data = Timer::first();
         return response()->json($data);
     }
 
@@ -55,7 +54,12 @@ class RecordController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+
+        $data = Timer::find($id);
+        $data->timein = $request->get('timer');
+        $data->update();
+
+        return response()->json($data);
     }
 
     /**

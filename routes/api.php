@@ -10,6 +10,7 @@ use App\Http\Controllers\Api\EditController;
 use App\Http\Controllers\Api\MemberController;
 use App\Http\Controllers\Api\AddController;
 use App\Http\Controllers\Api\RecordController;
+use App\Http\Controllers\Api\TimerController;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -48,4 +49,5 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::post('addin', [AddController::class, 'addin']);
     Route::post('addout', [AddController::class, 'addout']);
     Route::resource('record', RecordController::class);
+    Route::resource('timer', TimerController::class);
 });

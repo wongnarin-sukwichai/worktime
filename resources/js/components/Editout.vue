@@ -40,11 +40,24 @@
                 </tr>
                 <tr class="border-b">
                     <td class="p-4 border-r text-left">ชื่อ-นามสกุล</td>
-                    <td class="p-4 text-left">{{ this.name }} {{ this.surname }}</td>
+                    <td class="p-4 text-left">
+                        {{ this.name }} {{ this.surname }}
+                    </td>
                 </tr>
                 <tr class="border-b">
                     <td class="p-4 border-r text-left">วันที่</td>
                     <td class="p-4 text-left">{{ this.dat }}</td>
+                </tr>
+                <tr class="border-b">
+                    <td class="p-4 border-r text-left">
+                        <font class="text-red-700 pr-1">**</font>หมายเหตุ
+                    </td>
+                    <td class="p-4 text-left">
+                        <textarea
+                            class="border p-2 w-full rounded-lg"
+                            v-model="this.dataEdit.otherout"
+                        ></textarea>
+                    </td>
                 </tr>
                 <tr class="border-b">
                     <td class="p-4 border-r text-left">เวลา</td>
@@ -90,6 +103,7 @@ export default {
             dataEdit: {
                 id: "",
                 timeout: "",
+                otherout: "",
             },
         };
     },
@@ -108,6 +122,7 @@ export default {
 
                     this.dataEdit.id = response.data.id;
                     this.dataEdit.timeout = response.data.timeout;
+                    this.dataEdit.otherout = response.data.otherout;
                 })
                 .catch((err) => {
                     console.log(err);
@@ -115,14 +130,23 @@ export default {
         },
 
         async sendEdit() {
-            await this.$store.dispatch("updateOut", this.dataEdit);
-            Swal.fire({
-                position: "top-end",
-                icon: "success",
-                title: "บันทึกข้อมูลเรียบร้อย",
-                showConfirmButton: false,
-                timer: 1500,
-            });
+            if (this.dataEdit.otherin === "") {
+                Swal.fire({
+                    icon: "error",
+                    title: "ผิดพลาด",
+                    text: "กรุณาใส่หมายเหตุ",
+                    timer: 1500,
+                });
+            } else {
+                await this.$store.dispatch("updateOut", this.dataEdit);
+                Swal.fire({
+                    position: "top-end",
+                    icon: "success",
+                    title: "บันทึกข้อมูลเรียบร้อย",
+                    showConfirmButton: false,
+                    timer: 1500,
+                });
+            }
         },
     },
 };

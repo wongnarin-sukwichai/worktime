@@ -63,6 +63,18 @@
                                             scope="col"
                                             class="border-r px-6 py-2 font-normal"
                                         >
+                                            สถานะ
+                                        </th>
+                                        <th
+                                            scope="col"
+                                            class="border-r px-6 py-2 font-normal"
+                                        >
+                                            หมายเหตุ
+                                        </th>
+                                        <th
+                                            scope="col"
+                                            class="border-r px-6 py-2 font-normal"
+                                        >
                                             #
                                         </th>
                                         <th
@@ -87,7 +99,7 @@
                                 >
                                     <tr>
                                         <th
-                                            colspan="8"
+                                            colspan="10"
                                             class="border-b p-2 font-normal text-left bg-sky-100"
                                         >
                                             {{ dep.dep_title }}
@@ -115,7 +127,11 @@
                                             <td
                                                 class="whitespace-nowrap border-r px-6 py-2"
                                             >
-                                                {{ report.dat }}
+                                                {{
+                                                    moment(report.dat).format(
+                                                        "L"
+                                                    )
+                                                }}
                                             </td>
                                             <td
                                                 class="whitespace-nowrap border-r px-6 py-2"
@@ -154,9 +170,35 @@
                                             <td
                                                 v-else
                                                 class="border-r hover:cursor-pointer hover:bg-sky-100"
-                                                @click="addIn(report.uid,report.dat)"
+                                                @click="
+                                                    addIn(
+                                                        report.uid,
+                                                        report.dat
+                                                    )
+                                                "
                                             ></td>
-
+                                            <td
+                                                class="whitespace-nowrap border-r px-6 py-2"
+                                                :class="
+                                                    report.timein > this.timer
+                                                        ? 'bg-red-300'
+                                                        : 'bg-gray-0'
+                                                "
+                                            >
+                                                <span
+                                                    class="text-white"
+                                                    v-if="
+                                                        report.timein >
+                                                        this.timer
+                                                    "
+                                                    >มาสาย</span
+                                                >
+                                            </td>
+                                            <td
+                                                class="whitespace-nowrap border-r px-6 py-2"
+                                            >
+                                                {{ report.otherin }}
+                                            </td>
                                             <td
                                                 class="whitespace-nowrap border-r px-6 py-2"
                                             >
@@ -194,11 +236,18 @@
                                             <td
                                                 v-else
                                                 class="border-r hover:cursor-pointer hover:bg-sky-100"
-                                                @click="addOut(report.uid,report.dat)"
+                                                @click="
+                                                    addOut(
+                                                        report.uid,
+                                                        report.dat
+                                                    )
+                                                "
                                             ></td>
                                             <td
                                                 class="whitespace-nowrap border-r px-6 py-2"
-                                            ></td>
+                                            >
+                                                {{ report.otherout }}
+                                            </td>
                                         </template>
                                     </tr>
                                 </thead>
@@ -220,6 +269,7 @@ import axios from "axios";
 export default {
     mounted() {
         this.getDep();
+        this.getTimer();
     },
     data() {
         return {
@@ -231,6 +281,8 @@ export default {
             },
             showDayList: "",
             depList: "",
+            moment: moment,
+            timer: "",
         };
     },
     methods: {
@@ -251,6 +303,16 @@ export default {
                 .get("/api/dep")
                 .then((response) => {
                     this.depList = response.data;
+                })
+                .catch((err) => {
+                    console.log(err);
+                });
+        },
+        getTimer() {
+            axios
+                .get("/api/timer")
+                .then((response) => {
+                    this.timer = response.data.timein;
                 })
                 .catch((err) => {
                     console.log(err);

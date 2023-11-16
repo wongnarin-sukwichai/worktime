@@ -5,6 +5,7 @@ import upload from "./modules/upload";
 import report from "./modules/report";
 import edit from "./modules/edit";
 import add from "./modules/add";
+import timer from "./modules/timer";
 
 const store = createStore({
     modules:{
@@ -13,7 +14,8 @@ const store = createStore({
         upload,
         report,
         edit,
-        add
+        add,
+        timer
     }
 })
 

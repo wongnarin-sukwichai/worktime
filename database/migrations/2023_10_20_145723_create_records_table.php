@@ -28,6 +28,7 @@ return new class extends Migration
             $table->string('timetype');
             $table->string('timeold');
             $table->string('timenew');
+            $table->string('other')->nullable();
             $table->timestamps();
         });
     }

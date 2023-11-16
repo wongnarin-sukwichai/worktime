@@ -11,6 +11,7 @@ import Member from "../components/Member.vue";
 import Addin from "../components/AddIn.vue";
 import Addout from "../components/AddIOut.vue";
 import Record from "../components/Record.vue";
+import Timer from "../components/Timer.vue";
 
 import store from "../store";
 
@@ -96,6 +97,14 @@ const routes = [
             path: "/record",
             name: "record",
             component: Record,
+            meta: {
+                guard: "auth"
+            }
+        },
+        {
+            path: "/timer",
+            name: "timer",
+            component: Timer,
             meta: {
                 guard: "auth"
             }

@@ -76,7 +76,8 @@ class EditController extends Controller
     {
         $request->validate([
             'id' => 'required',
-            'timein' => 'required'
+            'timein' => 'required',
+            'otherin' => 'required'
         ]);
 
         $data = Checkin::find($request['id']);
@@ -98,12 +99,14 @@ class EditController extends Controller
         $res->timetype = 'เข้างาน';
         $res->timeold = $data->timein;
         $res->timenew = $request['timein'];
+        $res->other = $request['otherin'];
 
         $res->save();
 
 
         // update ข้อมูล
         $data->timein = $request['timein'];
+        $data->otherin = $request['otherin'];
         $data->update();
 
         return response()->json($data);        
@@ -114,7 +117,8 @@ class EditController extends Controller
     {
         $request->validate([
             'id' => 'required',
-            'timeout' => 'required'
+            'timeout' => 'required',
+            'otherout' => 'required'
         ]);
 
         $data = Checkout::find($request['id']);
@@ -136,12 +140,14 @@ class EditController extends Controller
         $res->timetype = 'ออกงาน';
         $res->timeold = $data->timeout;
         $res->timenew = $request['timeout'];
+        $res->other = $request['otherout'];
 
         $res->save();
 
 
         // update ข้อมูล
         $data->timeout = $request['timeout'];
+        $data->otherout = $request['otherout'];
         $data->update();
 
         return response()->json($data);        

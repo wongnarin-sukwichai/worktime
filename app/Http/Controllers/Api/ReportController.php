@@ -57,6 +57,7 @@ class ReportController extends Controller
                     $arr[$i]['idin'] = $j->id;
                     $arr[$i]['picin'] = $j->pic;
                     $arr[$i]['timein'] = $j->timein;
+                    $arr[$i]['otherin'] = $j->otherin;
 
                     foreach ($cout as $k) {
 
@@ -64,6 +65,7 @@ class ReportController extends Controller
                             $arr[$i]['idout'] = $k->id;
                             $arr[$i]['picout'] = $k->pic;
                             $arr[$i]['timeout'] = $k->timeout;
+                            $arr[$i]['otherout'] = $k->otherout;
                         }
                     }
                 } else {
@@ -74,6 +76,7 @@ class ReportController extends Controller
                             $arr[$i]['idout'] = $k->id;
                             $arr[$i]['picout'] = $k->pic;
                             $arr[$i]['timeout'] = $k->timeout;
+                            $arr[$i]['otherout'] = $k->otherout;
                         }
                     }
                 }
@@ -151,6 +154,7 @@ class ReportController extends Controller
                     $arr[$i]['picin'] = $r->pic;
                     $arr[$i]['din'] = $r->d;
                     $arr[$i]['timein'] = $r->timein;
+                    $arr[$i]['otherin'] = $r->otherin;
 
                     foreach ($cout as $j) {
                         if ($i == $j->d) {
@@ -158,6 +162,7 @@ class ReportController extends Controller
                             $arr[$i]['picout'] = $j->pic;
                             $arr[$i]['dout'] = $j->d;
                             $arr[$i]['timeout'] = $j->timeout;
+                            $arr[$i]['otherout'] = $j->otherout;
                         }
                     }
                 } else {
@@ -168,6 +173,7 @@ class ReportController extends Controller
                             $arr[$i]['picout'] = $j->pic;
                             $arr[$i]['dout'] = $j->d;
                             $arr[$i]['timeout'] = $j->timeout;
+                            $arr[$i]['otherout'] = $j->otherout;
                         }
                     }
                 }

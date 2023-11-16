@@ -45,6 +45,17 @@
                                 ></box-icon>
                                 <p class="p-1">รายงานการแก้ไข</p></router-link
                             >
+                            <router-link
+                                to="/timer"
+                                class="flex p-2 rounded-lg hover:bg-gray-100 hover:text-gray-700"
+                                ><box-icon
+                                    name="timer"
+                                    color="gray"
+                                    size="sm"
+                                    class="pr-2"
+                                ></box-icon>
+                                <p class="p-1">ตั้งค่าเวลามาสาย</p></router-link
+                            >
                         </div>
                     </div>
                     <div class="space-y-2">

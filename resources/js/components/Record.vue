@@ -78,6 +78,12 @@
                                         >
                                             เวลาใหม่
                                         </th>
+                                        <th
+                                            scope="col"
+                                            class="border-r px-6 py-2 font-normal"
+                                        >
+                                            หมายเหตุ
+                                        </th>
                                     </tr>
                                 </thead>
 
@@ -94,12 +100,12 @@
                                         <td
                                             class="whitespace-nowrap border-r px-6 py-2"
                                         >
-                                            {{ momentDate(record.created_at) }}
+                                            {{ moment(record.created_at).add(543, "years").format('L') }}
                                         </td>
                                         <td
                                             class="whitespace-nowrap border-r px-6 py-2"
                                         >
-                                            {{ momentTime(record.created_at) }}
+                                            {{ moment(record.created_at).format('LTS') }}
                                             น.
                                         </td>
                                         <td
@@ -129,7 +135,7 @@
                                         <td
                                             class="whitespace-nowrap border-r px-6 py-2"
                                         >
-                                            {{ record.dat }}
+                                            {{ moment(record.dat).format('L') }}
                                         </td>
                                         <td
                                             class="whitespace-nowrap border-r px-6 py-2"
@@ -168,6 +174,11 @@
                                         >
                                             {{ record.timenew }}
                                         </td>
+                                        <td
+                                            class="whitespace-nowrap border-r px-6 py-2"
+                                        >
+                                            {{ record.other }}
+                                        </td>
                                     </tr>
                                 </thead>
                             </tbody>
@@ -189,6 +200,7 @@
 <script>
 import "boxicons";
 import moment from "moment";
+import "moment/dist/locale/th";
 import axios from "axios";
 import { TailwindPagination } from "laravel-vue-pagination";
 
@@ -200,6 +212,7 @@ export default {
         return {
             path: "/storage/img",
             recordList: [],
+            moment: moment
         };
     },
     methods: {
@@ -212,9 +225,6 @@ export default {
                 .catch((err) => {
                     console.log(err);
                 });
-        },
-        momentDate(data) {
-            return moment(data).format("d/M/Y");
         },
         momentTime(data) {
             return moment(data).format("hh:mm:ss");

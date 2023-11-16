@@ -7,7 +7,7 @@
                 >
                     <div>
                         <div id="digit_clock_date" class="font-semibold"></div>
-                        <p class="text-gray-400">ว/ด/ป</p>
+                        <p class="text-gray-300 text-4xl">ว/ด/ป</p>
                     </div>
                 </div>
 
@@ -26,13 +26,13 @@
                     class="space-x-8 flex justify-between mt-32 md:mt-0 md:justify-center"
                 >
                     <router-link
-                        class="rounded-full bg-sky-300 px-8 py-4 text-gray-50 hover:bg-sky-400"
+                        class="rounded-full bg-sky-300 px-8 py-4 text-gray-50 hover:bg-sky-400 text-4xl"
                         to="/"
                     >
                         เข้างาน
                     </router-link>
                     <router-link
-                        class="rounded-full px-8 py-4 text-orange-300 outline outline-offset-0 outline-1 outline-orange-300 hover:bg-orange-300 hover:text-gray-50"
+                        class="rounded-full px-8 py-4 text-orange-300 outline outline-offset-0 outline-1 outline-orange-300 hover:bg-orange-300 hover:text-gray-50 text-4xl"
                         to="checkout"
                     >
                         ออกงาน
@@ -46,7 +46,7 @@
                 </h1>
                 <p class="font-light text-gray-600 mt-3"></p>
                 <p class="mt-8 text-gray-500"></p>
-                <p class="mt-2 text-gray-500">
+                <p class="mt-2 text-gray-500 text-xl">
                     สำนักวิทยบริการ มหาวิทยาลัยมหาสารคาม
                 </p>
             </div>
@@ -73,7 +73,7 @@
                 <div class="relative mb-4 flex flex-wrap items-stretch">
                     <input
                         type="text"
-                        class="relative m-0 -ml-0.5 block w-[1px] min-w-0 flex-auto rounded-lg border border-solid border-neutral-300 bg-transparent bg-clip-padding px-3 py-[0.25rem] text-base font-normal leading-[1.6] text-neutral-700 outline-none transition duration-200 ease-in-out focus:z-[3] focus:border-primary focus:text-neutral-700 focus:shadow-[inset_0_0_0_1px_rgb(59,113,202)] focus:outline-none dark:border-neutral-600 dark:text-neutral-200 dark:placeholder:text-neutral-200 dark:focus:border-primary"
+                        class="relative h-28 text-6xl text-sky-700 m-0 -ml-0.5 block w-[1px] min-w-0 flex-auto rounded-lg border border-solid border-neutral-300 bg-transparent bg-clip-padding px-3 py-[0.25rem] leading-[1.6] outline-none transition duration-200 ease-in-out focus:z-[3] focus:border-primary focus:shadow-[inset_0_0_0_1px_rgb(59,113,202)] focus:outline-none"
                         aria-label="Example text with button addon"
                         aria-describedby="button-addon1"
                         style="text-align: center"

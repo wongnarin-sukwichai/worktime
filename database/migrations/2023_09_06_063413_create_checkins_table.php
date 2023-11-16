@@ -23,6 +23,7 @@ return new class extends Migration
             $table->string('m');
             $table->string('y');
             $table->string('timein');
+            $table->string('otherin')->nullable();
             $table->string('created')->nullable()->comment('กรณี admin เพิ่มข้อมูลเข้าระบบ');
             $table->timestamps();
         });

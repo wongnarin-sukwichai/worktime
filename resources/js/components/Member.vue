@@ -92,6 +92,18 @@
                                             scope="col"
                                             class="border-r px-6 py-2 font-normal"
                                         >
+                                            สถานะ
+                                        </th>
+                                        <th
+                                            scope="col"
+                                            class="border-r px-6 py-2 font-normal"
+                                        >
+                                            หมายเหตุ
+                                        </th>
+                                        <th
+                                            scope="col"
+                                            class="border-r px-6 py-2 font-normal"
+                                        >
                                             #
                                         </th>
                                         <th
@@ -114,7 +126,9 @@
                                     <!-- รายชื่อ -->
                                     <tr
                                         class="border-b"
-                                        v-for="(report, index) in showMemberList"
+                                        v-for="(
+                                            report, index
+                                        ) in showMemberList"
                                         :key="index"
                                     >
                                         <td
@@ -131,7 +145,7 @@
                                         <td
                                             class="whitespace-nowrap border-r px-6 py-2"
                                         >
-                                            {{ report.dat }}
+                                            {{ moment(report.dat).format("L") }}
                                         </td>
                                         <td
                                             class="whitespace-nowrap border-r px-6 py-2"
@@ -164,6 +178,28 @@
                                             >
                                                 {{ report.timein }}
                                             </a>
+                                        </td>
+                                        <td
+                                                class="whitespace-nowrap border-r px-6 py-2"
+                                                :class="
+                                                    report.timein > this.timer
+                                                        ? 'bg-red-300'
+                                                        : 'bg-gray-0'
+                                                "
+                                            >
+                                                <span
+                                                    class="text-white"
+                                                    v-if="
+                                                        report.timein >
+                                                        this.timer
+                                                    "
+                                                    >มาสาย</span
+                                                >
+                                            </td>
+                                        <td
+                                            class="whitespace-nowrap border-r px-6 py-2"
+                                        >
+                                            {{ report.otherin }}
                                         </td>
                                         <td
                                             class="whitespace-nowrap border-r px-6 py-2"
@@ -199,7 +235,9 @@
                                         </td>
                                         <td
                                             class="whitespace-nowrap border-r px-6 py-2"
-                                        ></td>
+                                        >
+                                            {{ report.otherout }}
+                                        </td>
                                     </tr>
                                 </thead>
                             </tbody>
@@ -220,6 +258,7 @@ import axios from "axios";
 export default {
     mounted() {
         this.getMember();
+        this.getTimer();
     },
     data() {
         return {
@@ -234,6 +273,8 @@ export default {
             },
             showMemberList: "",
             memberList: "",
+            moment: moment,
+            timer: "",
         };
     },
     methods: {
@@ -259,10 +300,25 @@ export default {
                     console.log(err);
                 });
         },
-
+        getTimer() {
+            axios
+                .get("/api/timer")
+                .then((response) => {
+                    this.timer = response.data.timein;
+                })
+                .catch((err) => {
+                    console.log(err);
+                });
+        },
         choose(id, name, surname) {
             this.report.uid = id;
             this.myname = name + " " + surname;
+        },
+        editIn(id) {
+            this.$router.push("/editin/" + id);
+        },
+        editOut(id) {
+            this.$router.push("/editout/" + id);
         },
     },
     components: {
