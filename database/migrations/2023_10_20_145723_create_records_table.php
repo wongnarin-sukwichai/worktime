@@ -17,7 +17,7 @@ return new class extends Migration
             $table->integer('type')->comment('1=เข้างาน,2=ออกงาน,3=เพิ่ม');
             $table->string('created_by')->comment('ยื่นโดย');
             $table->string('uid');
-            $table->string('pic');
+            $table->string('pic')->nullable();
             $table->string('name');
             $table->string('surname');
             $table->string('local')->nullable();

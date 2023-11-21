@@ -40,6 +40,17 @@
                     <td class="p-4 text-left">{{ this.dataIn.dat }}</td>
                 </tr>
                 <tr class="border-b">
+                    <td class="p-4 border-r text-left">
+                        <font class="text-red-700 pr-1">**</font>หมายเหตุ
+                    </td>
+                    <td class="p-4 text-left">
+                        <textarea
+                            class="border p-2 w-full rounded-lg"
+                            v-model="this.dataIn.other"
+                        ></textarea>
+                    </td>
+                </tr>
+                <tr class="border-b">
                     <td class="p-4 border-r text-left">เวลา</td>
                     <td class="flex p-4 text-left">
                         <input
@@ -79,6 +90,7 @@ export default {
                 surname: "",
                 dat: this.$route.params.dat,
                 timein: "",
+                other: ""
             },
         };
     },

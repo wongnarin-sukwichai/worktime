@@ -9,7 +9,7 @@
 
     <!-- Fonts -->
     <link rel="icon" href="{{ url('img/favicon.jpg') }}">
-    <link href="https://fonts.googleapis.com/css?family=Prompt|Sarabun" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Anuphan" rel="stylesheet">
 
     @vite(['resources/css/app.css', 'resources/js/app.js'])
 

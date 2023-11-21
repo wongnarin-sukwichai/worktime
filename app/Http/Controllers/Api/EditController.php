@@ -9,6 +9,7 @@ use App\Models\Checkin;
 use App\Models\Checkout;
 use App\Models\Record;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 
 class EditController extends Controller
 {
@@ -102,7 +103,6 @@ class EditController extends Controller
         $res->other = $request['otherin'];
 
         $res->save();
-
 
         // update ข้อมูล
         $data->timein = $request['timein'];

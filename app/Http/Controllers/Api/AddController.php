@@ -63,6 +63,7 @@ class AddController extends Controller
         $data->m = $m;
         $data->y = $y;
         $data->timein = $request['timein'];
+        $data->other = $request['otherin'];
         $data->created = Auth::user()->name . ' ' . Auth::user()->surname;
 
         $data->save();
@@ -95,6 +96,7 @@ class AddController extends Controller
         $data->m = $m;
         $data->y = $y;
         $data->timeout = $request['timeout'];
+        $data->other = $request['otherout'];
         $data->created = Auth::user()->name . ' ' . Auth::user()->surname;
 
         $data->save();
