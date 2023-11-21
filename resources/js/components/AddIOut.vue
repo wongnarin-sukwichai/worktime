@@ -79,6 +79,7 @@ export default {
                 surname: "",
                 dat: this.$route.params.dat,
                 timeout: "",
+                other: ""
             },
         };
     },

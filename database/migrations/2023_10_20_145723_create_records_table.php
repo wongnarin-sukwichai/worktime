@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('records', function (Blueprint $table) {
             $table->id()->comment('เก็บประวัติการแก้ไขเวลาเข้า-ออก');
-            $table->integer('ref_id')->comment('อ้างอิง id ลา');
+            $table->integer('ref_id')->nullable()->comment('อ้างอิง id ลา');
             $table->integer('type')->comment('1=เข้างาน,2=ออกงาน,3=เพิ่ม');
             $table->string('created_by')->comment('ยื่นโดย');
             $table->string('uid');
@@ -26,7 +26,7 @@ return new class extends Migration
             $table->string('m');
             $table->string('y');
             $table->string('timetype');
-            $table->string('timeold');
+            $table->string('timeold')->nullable();
             $table->string('timenew');
             $table->string('other')->nullable();
             $table->timestamps();

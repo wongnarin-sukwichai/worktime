@@ -37,7 +37,7 @@
                 </tr>
                 <tr class="border-b">
                     <td class="p-4 border-r text-left">วันที่</td>
-                    <td class="p-4 text-left">{{ this.dataIn.dat }}</td>
+                    <td class="p-4 text-left">{{ moment(this.dataIn.dat).format('L') }}</td>
                 </tr>
                 <tr class="border-b">
                     <td class="p-4 border-r text-left">
@@ -77,6 +77,8 @@
 import "boxicons";
 import axios from "axios";
 import Swal from "sweetalert2";
+import moment from "moment";
+import "moment/dist/locale/th";
 
 export default {
     mounted() {
@@ -92,6 +94,7 @@ export default {
                 timein: "",
                 other: ""
             },
+            moment: moment
         };
     },
     methods: {

@@ -11,6 +11,7 @@ use Carbon\Carbon;
 use App\Models\Checkin;
 use App\Models\Checkout;
 use App\Models\Member;
+use App\Models\Record;
 
 class AddController extends Controller
 {
@@ -63,10 +64,31 @@ class AddController extends Controller
         $data->m = $m;
         $data->y = $y;
         $data->timein = $request['timein'];
-        $data->other = $request['otherin'];
+        $data->otherin = $request['other'];
         $data->created = Auth::user()->name . ' ' . Auth::user()->surname;
 
         $data->save();
+
+        // บันทึกลง table Record ก่อน
+        $res = new Record();
+        $res->ref_id = null;
+        $res->type = 1;
+        $res->created_by = Auth::user()->name . ' ' . Auth::user()->surname;
+        $res->uid = $request['uid'];
+        $res->pic = null;
+        $res->name = $request['name'];
+        $res->surname = $request['surname'];
+        $res->local = 'arec';
+        $res->dat = $data->dat;
+        $res->d = $data->d;
+        $res->m = $data->m;
+        $res->y = $data->y;
+        $res->timetype = 'เข้างาน';
+        $res->timeold = null;
+        $res->timenew = $request['timein'];
+        $res->other = $request['other'];
+
+        $res->save();
 
         return response()->json($data);
     }
@@ -90,16 +112,37 @@ class AddController extends Controller
         $data->uid = $request['uid'];
         $data->name = $request['name'];
         $data->surname = $request['surname'];
-        $data->local = null;
+        $data->local = 'arec';
         $data->dat = $request['dat'];
         $data->d = $d;
         $data->m = $m;
         $data->y = $y;
         $data->timeout = $request['timeout'];
-        $data->other = $request['otherout'];
+        $data->otherout = $request['other'];
         $data->created = Auth::user()->name . ' ' . Auth::user()->surname;
 
         $data->save();
+
+        // บันทึกลง table Record ก่อน
+        $res = new Record();
+        $res->ref_id = null;
+        $res->type = 1;
+        $res->created_by = Auth::user()->name . ' ' . Auth::user()->surname;
+        $res->uid = $request['uid'];
+        $res->pic = null;
+        $res->name = $request['name'];
+        $res->surname = $request['surname'];
+        $res->local = 'arec';
+        $res->dat = $data->dat;
+        $res->d = $data->d;
+        $res->m = $data->m;
+        $res->y = $data->y;
+        $res->timetype = 'ออกงาน';
+        $res->timeold = null;
+        $res->timenew = $request['timeout'];
+        $res->other = $request['other'];
+
+        $res->save();
 
         return response()->json($data);
     }
