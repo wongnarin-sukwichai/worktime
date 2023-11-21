@@ -9,7 +9,7 @@ import Editin from "../components/Editin.vue";
 import Editout from "../components/Editout.vue";
 import Member from "../components/Member.vue";
 import Addin from "../components/AddIn.vue";
-import Addout from "../components/AddIOut.vue";
+import Addout from "../components/AddOut.vue";
 import Record from "../components/Record.vue";
 import Timer from "../components/Timer.vue";
 

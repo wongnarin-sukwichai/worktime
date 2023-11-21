@@ -37,7 +37,18 @@
                 </tr>
                 <tr class="border-b">
                     <td class="p-4 border-r text-left">วันที่</td>
-                    <td class="p-4 text-left">{{ this.dataOut.dat }}</td>
+                    <td class="p-4 text-left">{{ moment(this.dataOut.dat).format('L') }}</td>
+                </tr>
+                <tr class="border-b">
+                    <td class="p-4 border-r text-left">
+                        <font class="text-red-700 pr-1">**</font>หมายเหตุ
+                    </td>
+                    <td class="p-4 text-left">
+                        <textarea
+                            class="border p-2 w-full rounded-lg"
+                            v-model="this.dataOut.other"
+                        ></textarea>
+                    </td>
                 </tr>
                 <tr class="border-b">
                     <td class="p-4 border-r text-left">เวลา</td>
@@ -66,6 +77,8 @@
 import "boxicons";
 import axios from "axios";
 import Swal from "sweetalert2";
+import moment from "moment";
+import "moment/dist/locale/th";
 
 export default {
     mounted() {
@@ -81,6 +94,7 @@ export default {
                 timeout: "",
                 other: ""
             },
+            moment: moment
         };
     },
     methods: {
