@@ -28,6 +28,7 @@ use Illuminate\Support\Facades\Route;
 Route::resource('store', CheckinController::class);
 Route::resource('upload', UploadController::class);
 Route::post('checkout', [CheckinController::class, 'checkout']);
+Route::resource('record', RecordController::class);
 
 Route::post('logout', [AuthController::class, 'logout']);
 
@@ -48,6 +49,5 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::get('showname/{uid}', [AddController::class, 'showname']);
     Route::post('addin', [AddController::class, 'addin']);
     Route::post('addout', [AddController::class, 'addout']);
-    Route::resource('record', RecordController::class);
     Route::resource('timer', TimerController::class);
 });

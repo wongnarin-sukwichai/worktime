@@ -56,7 +56,6 @@
                         <input
                             type="text"
                             class="border p-2"
-                            placeholder="** 08:30:00 **"
                             v-model="this.dataIn.timein"
                         />
                         <box-icon
@@ -91,7 +90,7 @@ export default {
                 name: "",
                 surname: "",
                 dat: this.$route.params.dat,
-                timein: "",
+                timein: "00:00:00",
                 other: ""
             },
             moment: moment

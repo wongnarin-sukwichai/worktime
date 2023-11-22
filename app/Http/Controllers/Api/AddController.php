@@ -6,7 +6,6 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
-use App\Models\User;
 use Carbon\Carbon;
 use App\Models\Checkin;
 use App\Models\Checkout;
@@ -79,10 +78,10 @@ class AddController extends Controller
         $res->name = $request['name'];
         $res->surname = $request['surname'];
         $res->local = 'arec';
-        $res->dat = $data->dat;
-        $res->d = $data->d;
-        $res->m = $data->m;
-        $res->y = $data->y;
+        $res->dat = $request['dat'];
+        $res->d = $d;
+        $res->m = $m;
+        $res->y = $y;
         $res->timetype = 'เข้างาน';
         $res->timeold = null;
         $res->timenew = $request['timein'];
@@ -112,7 +111,7 @@ class AddController extends Controller
         $data->uid = $request['uid'];
         $data->name = $request['name'];
         $data->surname = $request['surname'];
-        $data->local = 'arec';
+        $data->local = null;
         $data->dat = $request['dat'];
         $data->d = $d;
         $data->m = $m;
@@ -126,17 +125,17 @@ class AddController extends Controller
         // บันทึกลง table Record ก่อน
         $res = new Record();
         $res->ref_id = null;
-        $res->type = 1;
+        $res->type = 2;
         $res->created_by = Auth::user()->name . ' ' . Auth::user()->surname;
         $res->uid = $request['uid'];
         $res->pic = null;
         $res->name = $request['name'];
         $res->surname = $request['surname'];
         $res->local = 'arec';
-        $res->dat = $data->dat;
-        $res->d = $data->d;
-        $res->m = $data->m;
-        $res->y = $data->y;
+        $res->dat = $request['dat'];
+        $res->d = $d;
+        $res->m = $m;
+        $res->y = $y;
         $res->timetype = 'ออกงาน';
         $res->timeold = null;
         $res->timenew = $request['timeout'];
