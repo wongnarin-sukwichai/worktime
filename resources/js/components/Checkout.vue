@@ -13,12 +13,12 @@
 
                 <div class="relative">
                     <div
-                        class="w-48 h-48 bg-indigo-100 mx-auto rounded-full shadow-2xl absolute inset-x-0 top-0 -mt-24 flex items-center justify-center text-indigo-500"
+                        class="w-72 h-72 bg-indigo-100 mx-auto rounded-full shadow-2xl absolute inset-x-0 top-0 -mt-40 flex items-center justify-center text-indigo-500"
                     >
                         <video
                             ref="webcam"
                             autoplay="true"
-                            class="rounded-full w-48 h-48 mx-auto"
+                            class="rounded-full w-72 h-72 mx-auto"
                         ></video>
                     </div>
                 </div>
@@ -53,17 +53,17 @@
 
             <div class="flex flex-wrap justify-center mt-4">
                 <div class="flex justify-center px-4">
-                    <p class="px-4 pt-4 mr-2">Lates :</p>
+                    <p class="px-4 pt-5 mr-2 text-2xl">Lates :</p>
                     <canvas
                         class="rounded-full border shadow-lg"
                         ref="showCapture"
-                        :width="50"
-                        :height="50"
+                        :width="80"
+                        :height="80"
                     ></canvas>
-                    <p class="px-3 pt-3 ml-2 border rounded-full shadow-lg">
+                    <p class="px-3 pt-5 ml-2 border rounded-full shadow-lg text-2xl">
                         {{ this.profile }}
                     </p>
-                    <p class="px-3 pt-3 ml-2 border rounded-full shadow-lg">
+                    <p class="px-3 pt-5 ml-2 border rounded-full shadow-lg text-2xl">
                         {{ this.timeout }}
                     </p>
                 </div>
@@ -129,7 +129,7 @@ export default {
 
                 //cap หน้าจอแล้วแสดงภาพ
                 const context = this.$refs.showCapture.getContext("2d");
-                context.drawImage(this.$refs.webcam, 0, 0, 50, 50);
+                context.drawImage(this.$refs.webcam, 0, 0, 80, 80);
                 
             } catch (err) {
                 Swal.fire({
