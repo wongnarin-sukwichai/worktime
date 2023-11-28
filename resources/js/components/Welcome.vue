@@ -1,5 +1,5 @@
 <template>
-    <div class="p-16 bg-sky-50">
+    <div class="p-16 bg-gradient-to-r from-blue-400 to-emerald-400">
         <div class="p-8 bg-white shadow-lg mt-24">
             <div class="grid grid-cols-1 md:grid-cols-3">
                 <div

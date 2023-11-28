@@ -1,5 +1,5 @@
 <template>
-    <div class="p-16 bg-orange-50 shadow-inner">
+    <div class="p-16 shadow-inner bg-gradient-to-r from-rose-400 to-orange-300">
         <div class="p-8 bg-white shadow-lg mt-24">
             <div class="grid grid-cols-1 md:grid-cols-3">
                 <div

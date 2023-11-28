@@ -15,8 +15,29 @@
                 </button>
             </form>
         </div>
-        <div class="overflow-x-auto sm:-mx-6 lg:-mx-8">
+
+        <div class="flex justify-end" v-if="showDayList">
+            <button
+                class="px-4 pt-1 border shadow-lg rounded-lg bg-slate-200 hover:bg-slate-300"
+                @click.prevent="printPNG()"
+            >
+                <box-icon name="printer"></box-icon>
+            </button>
+        </div>
+
+        <div class="overflow-x-auto sm:-mx-6 lg:-mx-8" 
+            ref="printRecord"
+            >
             <div class="inline-block min-w-full py-2 sm:px-6 lg:px-8">
+                <div
+                    class="flex justify-center text-lg text-gray-400 mb-4"
+                    v-if="showDayList"
+                >
+                    Print from the Worktime System Academic Resource Center MSU
+                    |
+                    {{ moment().format("LLL") }} น.
+                </div>
+
                 <div class="overflow-hidden">
                     <table
                         class="min-w-full border text-center text-sm font-light"
@@ -265,6 +286,7 @@ import "boxicons";
 import Datepicker from "vue3-datepicker";
 import moment from "moment";
 import axios from "axios";
+import html2canvas from "html2canvas";
 
 export default {
     mounted() {
@@ -273,6 +295,7 @@ export default {
     },
     data() {
         return {
+            logo: "/img/library.png",
             path: "/storage/img",
             picked: new Date(),
             show: true,
@@ -329,6 +352,23 @@ export default {
         },
         addOut(uid, dat) {
             this.$router.push("/addout/" + uid + "/" + dat);
+        },
+        async printPNG() {
+            const el = this.$refs.printRecord;
+            const options = {
+                type: "dataURL",
+            };
+            const printCanvas = await html2canvas(el, options);
+
+            const link = document.createElement("a");
+            link.setAttribute("download", "download.png");
+            link.setAttribute(
+                "href",
+                printCanvas
+                    .toDataURL("image/png")
+                    .replace("image/png", "image/octet-stream")
+            );
+            link.click();
         },
     },
     components: {
