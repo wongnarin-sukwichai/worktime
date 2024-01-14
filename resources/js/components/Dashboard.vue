@@ -19,18 +19,16 @@
         <div class="flex justify-end" v-if="showDayList">
             <button
                 class="px-4 pt-1 border shadow-lg rounded-lg bg-slate-200 hover:bg-slate-300"
-                @click.prevent="printPNG()"
+                @click.prevent="printReport()"
             >
                 <box-icon name="printer"></box-icon>
             </button>
         </div>
 
-        <div class="overflow-x-auto sm:-mx-6 lg:-mx-8" 
-            ref="printRecord"
-            >
+        <div class="overflow-x-auto sm:-mx-6 lg:-mx-8" ref="printRecord">
             <div class="inline-block min-w-full py-2 sm:px-6 lg:px-8">
                 <div
-                    class="flex justify-center text-lg text-gray-400 mb-4"
+                    class="flex justify-left text-lg text-gray-400 mb-4"
                     v-if="showDayList"
                 >
                     Print from the Worktime System Academic Resource Center MSU
@@ -159,7 +157,7 @@
                                             >
                                                 <img
                                                     v-if="report.picin"
-                                                    class="mx-auto rounded-full object-cover object-center h-10 w-10"
+                                                    class="mx-auto rounded-full object-cover object-center h-8 w-8 cursor-pointer"
                                                     alt=""
                                                     :src="
                                                         path +
@@ -172,6 +170,7 @@
                                                         '/' +
                                                         report.picin
                                                     "
+                                                    @click="showImg(report.y, report.m, report.d, report.picin)"
                                                 />
                                             </td>
 
@@ -225,7 +224,7 @@
                                             >
                                                 <img
                                                     v-if="report.picout"
-                                                    class="mx-auto rounded-full object-cover object-center h-10 w-10"
+                                                    class="mx-auto rounded-full object-cover object-center h-8 w-8 cursor-pointer"
                                                     alt=""
                                                     :src="
                                                         path +
@@ -238,6 +237,7 @@
                                                         '/' +
                                                         report.picout
                                                     "
+                                                    @click="showImg(report.y, report.m, report.d, report.picout)"
                                                 />
                                             </td>
 
@@ -287,9 +287,11 @@ import Datepicker from "vue3-datepicker";
 import moment from "moment";
 import axios from "axios";
 import html2canvas from "html2canvas";
+import { jsPDF } from "jspdf";
 
 export default {
     mounted() {
+        this.search();
         this.getDep();
         this.getTimer();
     },
@@ -353,23 +355,42 @@ export default {
         addOut(uid, dat) {
             this.$router.push("/addout/" + uid + "/" + dat);
         },
-        async printPNG() {
-            const el = this.$refs.printRecord;
-            const options = {
-                type: "dataURL",
-            };
-            const printCanvas = await html2canvas(el, options);
+        async printReport() {
+            var dom = this.$refs.printRecord; //'tabalo' is an Id in my to-do list table
+            html2canvas(dom).then(function (canvas) {
+                var imgData = canvas.toDataURL("image/png");
+                // var imgWidth = 210;
+                // var pageHeight = 290;
+                var imgWidth = 280;
+                var pageHeight = 300;
+                var imgHeight = (canvas.height * imgWidth) / canvas.width;
+                var heightLeft = imgHeight;
+                var doc = new jsPDF("p", "mm", "A4");
+                var position = 0; // give some top padding to first page
 
-            const link = document.createElement("a");
-            link.setAttribute("download", "download.png");
-            link.setAttribute(
-                "href",
-                printCanvas
-                    .toDataURL("image/png")
-                    .replace("image/png", "image/octet-stream")
-            );
-            link.click();
+                doc.addImage(imgData, "PNG", 0, position, imgWidth, imgHeight);
+                heightLeft -= pageHeight;
+
+                while (heightLeft >= 0) {
+                    position += heightLeft - imgHeight; // top padding for other pages
+                    doc.addPage();
+                    doc.addImage(
+                        imgData,
+                        "PNG",
+                        0,
+                        position,
+                        imgWidth,
+                        imgHeight
+                    );
+                    heightLeft -= pageHeight;
+                }
+                doc.save("file.pdf");
+            });
         },
+        showImg(y, m, d, pic)
+        {
+            window.open("/storage/img/" + y + "/" + m + "/" + d + "/" + pic, "_blank");
+        }
     },
     components: {
         Datepicker,
