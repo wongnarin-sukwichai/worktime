@@ -40,7 +40,8 @@ class CheckinController extends Controller
         ]);
 
         $now = Carbon::now();
-        $dat = $now->addYear(543)->format('Y-m-d');
+        // $dat = $now->addYear(543)->format('Y-m-d');
+        $dat = $now->format('Y-m-d');
         $y = $now->format('Y');
         $m = $now->format('m');
         $d = $now->format('d');
@@ -85,7 +86,8 @@ class CheckinController extends Controller
         ]);
 
         $now = Carbon::now();
-        $dat = $now->addYear(543)->format('Y-m-d');
+        // $dat = $now->addYear(543)->format('Y-m-d');
+        $dat = $now->format('Y-m-d');
         $y = $now->format('Y');
         $m = $now->format('m');
         $d = $now->format('d');
