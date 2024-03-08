@@ -8,6 +8,7 @@ use Illuminate\Http\Request;
 use App\Models\Checkin;
 use App\Models\Checkout;
 use App\Models\Record;
+use Carbon\Carbon;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 
@@ -53,105 +54,51 @@ class EditController extends Controller
         //
     }
 
-    public function editin($id)
-    {
-        $data = Checkin::find($id); 
-        return response()->json($data);
-    }
-
-    public function editout($id)
-    {
-        $data = Checkout::find($id); 
-        return response()->json($data);
-    }
-
     /**
      * Update the specified resource in storage.
      */
     public function update(Request $request, string $id)
     {
-        //
-    }
 
-    public function updatein(Request $request) 
-    {
-        $request->validate([
-            'id' => 'required',
-            'timein' => 'required',
-            'otherin' => 'required'
-        ]);
+        if ($request['code'] == 1) {
+            $data = Checkin::find($request['id']);
 
-        $data = Checkin::find($request['id']);
+            $result = $data->timein;
 
-        // บันทึกลง table Record ก่อน
+            $data->timein = $request['time'];
+            $data->otherin = $request['other'];
+        } else {
+            $data = Checkout::find($request['id']);
+
+            $result = $data->timeout;
+
+            $data->timeout = $request['time'];
+            $data->otherout = $request['other'];
+        }
+
+        $data->update();
+
         $res = new Record();
         $res->ref_id = $request['id'];
-        $res->type = 1;
+        $res->type = $request['code'];
         $res->created_by = Auth::user()->name . ' ' . Auth::user()->surname;
         $res->uid = $data->uid;
-        $res->pic = $data->pic;
-        $res->name = $data->name;
-        $res->surname = $data->surname;
-        $res->local = $data->local;
-        $res->dat = $data->dat;
-        $res->d = $data->d;
-        $res->m = $data->m;
-        $res->y = $data->y;
-        $res->timetype = 'เข้างาน';
-        $res->timeold = $data->timein;
-        $res->timenew = $request['timein'];
-        $res->other = $request['otherin'];
+        $res->name = $request['name'];
+        $res->surname = $request['surname'];
+        $res->local = 'arec';
+        $res->dat = $request['dat'];
+        $res->d = Carbon::createFromFormat('Y-m-d', $request['dat'])->format('d');
+        $res->m = Carbon::createFromFormat('Y-m-d', $request['dat'])->format('m');
+        $res->y = Carbon::createFromFormat('Y-m-d', $request['dat'])->format('Y');
+        $res->timeold = $result;
+        $res->timenew = $request['time'];
+        $res->other = $request['other'];
 
         $res->save();
 
-        // update ข้อมูล
-        $data->timein = $request['timein'];
-        $data->otherin = $request['otherin'];
-        $data->update();
-
-        return response()->json($data);        
-
-    }
-
-    public function updateout(Request $request) 
-    {
-        $request->validate([
-            'id' => 'required',
-            'timeout' => 'required',
-            'otherout' => 'required'
+        return response()->json([
+            'message' => 'แก้ไขข้อมูลเรียบร้อย'
         ]);
-
-        $data = Checkout::find($request['id']);
-
-        // บันทึกลง table Record ก่อน
-        $res = new Record();
-        $res->ref_id = $request['id'];
-        $res->type = 2;
-        $res->created_by = Auth::user()->name . ' ' . Auth::user()->surname;
-        $res->uid = $data->uid;
-        $res->pic = $data->pic;
-        $res->name = $data->name;
-        $res->surname = $data->surname;
-        $res->local = $data->local;
-        $res->dat = $data->dat;
-        $res->d = $data->d;
-        $res->m = $data->m;
-        $res->y = $data->y;
-        $res->timetype = 'ออกงาน';
-        $res->timeold = $data->timeout;
-        $res->timenew = $request['timeout'];
-        $res->other = $request['otherout'];
-
-        $res->save();
-
-
-        // update ข้อมูล
-        $data->timeout = $request['timeout'];
-        $data->otherout = $request['otherout'];
-        $data->update();
-
-        return response()->json($data);        
-
     }
 
     /**

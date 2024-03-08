@@ -50,61 +50,61 @@
                                     <tr>
                                         <th
                                             scope="col"
-                                            class="border-r px-6 py-2 font-normal"
+                                            class="border-r py-2 font-normal"
                                         >
                                             #
                                         </th>
                                         <th
                                             scope="col"
-                                            class="border-r px-6 py-2 font-normal"
+                                            class="border-r py-2 font-normal"
                                         >
                                             ชื่อ-นามสกุล
                                         </th>
                                         <th
                                             scope="col"
-                                            class="border-r px-6 py-2 font-normal"
+                                            class="border-r py-2 font-normal"
                                         >
                                             วันที่
                                         </th>
                                         <th
                                             scope="col"
-                                            class="border-r px-6 py-2 font-normal"
+                                            class="border-r py-2 font-normal"
                                         >
                                             #
                                         </th>
                                         <th
                                             scope="col"
-                                            class="border-r px-6 py-2 font-normal"
+                                            class="border-r py-2 font-normal"
                                         >
                                             เวลาเข้า
                                         </th>
                                         <th
                                             scope="col"
-                                            class="border-r px-6 py-2 font-normal"
+                                            class="border-r py-2 font-normal"
                                         >
                                             สถานะ
                                         </th>
                                         <th
                                             scope="col"
-                                            class="border-r px-6 py-2 font-normal"
+                                            class="border-r py-2 font-normal"
                                         >
                                             หมายเหตุ
                                         </th>
                                         <th
                                             scope="col"
-                                            class="border-r px-6 py-2 font-normal"
+                                            class="border-r py-2 font-normal"
                                         >
                                             #
                                         </th>
                                         <th
                                             scope="col"
-                                            class="border-r px-6 py-2 font-normal"
+                                            class="border-r py-2 font-normal"
                                         >
                                             เวลาออก
                                         </th>
                                         <th
                                             scope="col"
-                                            class="border-r px-6 py-2 font-normal"
+                                            class="border-r py-2 font-normal"
                                         >
                                             หมายเหตุ
                                         </th>
@@ -133,27 +133,32 @@
                                     >
                                         <template v-if="report.dep === dep.id">
                                             <td
-                                                class="whitespace-nowrap border-r px-6 py-2"
+                                                class="whitespace-nowrap border-r py-2"
                                             >
                                                 {{ index + 1 }}
                                             </td>
                                             <td
-                                                class="whitespace-nowrap border-r px-6 py-2"
+                                                class="whitespace-nowrap border-r py-2"
                                             >
                                                 {{ report.name }}
                                                 {{ report.surname }}
                                             </td>
                                             <td
-                                                class="whitespace-nowrap border-r px-6 py-2"
+                                                class="whitespace-nowrap border-r py-2"
                                             >
-                                                {{
+                                                <!-- {{
+                                                    moment(report.dat).add(543, "years").format(
+                                                        "L"
+                                                    )
+                                                }} -->
+                                                 {{
                                                     moment(report.dat).format(
                                                         "L"
                                                     )
                                                 }}
                                             </td>
                                             <td
-                                                class="whitespace-nowrap border-r px-6 py-2"
+                                                class="whitespace-nowrap border-r px-6 py-4"
                                             >
                                                 <img
                                                     v-if="report.picin"
@@ -176,7 +181,7 @@
 
                                             <td
                                                 v-if="report.timein"
-                                                class="whitespace-nowrap border-r px-6 py-2"
+                                                class="whitespace-nowrap border-r py-2"
                                             >
                                                 <a
                                                     class="hover:text-blue-500 hover:cursor-pointer"
@@ -198,7 +203,7 @@
                                                 "
                                             ></td>
                                             <td
-                                                class="whitespace-nowrap border-r px-6 py-2"
+                                                class="whitespace-nowrap border-r py-2"
                                                 :class="
                                                     report.timein > this.timer
                                                         ? 'bg-red-300'
@@ -215,12 +220,12 @@
                                                 >
                                             </td>
                                             <td
-                                                class="whitespace-nowrap border-r px-6 py-2"
+                                                class="whitespace-nowrap border-r py-2"
                                             >
                                                 {{ report.otherin }}
                                             </td>
                                             <td
-                                                class="whitespace-nowrap border-r px-6 py-2"
+                                                class="whitespace-nowrap border-r px-6 py-4"
                                             >
                                                 <img
                                                     v-if="report.picout"
@@ -243,7 +248,7 @@
 
                                             <td
                                                 v-if="report.timeout"
-                                                class="whitespace-nowrap border-r px-6 py-2"
+                                                class="whitespace-nowrap border-r py-2"
                                             >
                                                 <a
                                                     class="hover:text-blue-500 hover:cursor-pointer"
@@ -265,7 +270,7 @@
                                                 "
                                             ></td>
                                             <td
-                                                class="whitespace-nowrap border-r px-6 py-2"
+                                                class="whitespace-nowrap border-r py-2"
                                             >
                                                 {{ report.otherout }}
                                             </td>
@@ -313,7 +318,7 @@ export default {
     methods: {
         async search() {
             this.report.selected = moment(this.picked)
-                .add(543, "years")
+                //.add(543, "years")
                 .format("YYYY-MM-DD");
             // console.log(this.selected)
             try {

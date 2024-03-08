@@ -35,115 +35,59 @@ class AddController extends Controller
      */
     public function store(Request $request)
     {
-        //
-    }
-
-    public function addin(Request $request)
-    {
         $request->validate([
             'uid' => 'required',
             'name' => 'required',
             'surname' => 'required',
             'dat' => 'required',
-            'timein' => 'required'
+            'time' => 'required',
+            'code' => 'required'
         ]);
 
-        $d = Carbon::createFromFormat('Y-m-d', $request['dat'])->format('d');
-        $m = Carbon::createFromFormat('Y-m-d', $request['dat'])->format('m');
-        $y = Carbon::createFromFormat('Y-m-d', $request['dat'])->format('Y');
-
-        $data = new Checkin();
+        if($request['code'] == 1) {
+            $data = new Checkin();
+            $code = 'timein';
+            $result = 'otherin';
+        } else {
+            $data = new Checkout();
+            $code = 'timeout';
+            $result = 'otherout';
+        }
 
         $data->uid = $request['uid'];
         $data->name = $request['name'];
         $data->surname = $request['surname'];
-        $data->local = null;
+        $data->local = 'arec';
         $data->dat = $request['dat'];
-        $data->d = $d;
-        $data->m = $m;
-        $data->y = $y;
-        $data->timein = $request['timein'];
-        $data->otherin = $request['other'];
+        $data->d = Carbon::createFromFormat('Y-m-d', $request['dat'])->format('d');
+        $data->m = Carbon::createFromFormat('Y-m-d', $request['dat'])->format('m');
+        $data->y = Carbon::createFromFormat('Y-m-d', $request['dat'])->format('Y');
+        $data->$code = $request['time'];
+        $data->$result = $request['other'];
         $data->created = Auth::user()->name . ' ' . Auth::user()->surname;
 
         $data->save();
 
-        // บันทึกลง table Record ก่อน
         $res = new Record();
-        $res->ref_id = null;
-        $res->type = 1;
+
+        $res->type = '3';
         $res->created_by = Auth::user()->name . ' ' . Auth::user()->surname;
-        $res->uid = $request['uid'];
-        $res->pic = null;
+        $res->uid = $request['uid'] ;
         $res->name = $request['name'];
         $res->surname = $request['surname'];
         $res->local = 'arec';
         $res->dat = $request['dat'];
-        $res->d = $d;
-        $res->m = $m;
-        $res->y = $y;
-        $res->timetype = 'เข้างาน';
-        $res->timeold = null;
-        $res->timenew = $request['timein'];
+        $res->d = Carbon::createFromFormat('Y-m-d', $request['dat'])->format('d');
+        $res->m = Carbon::createFromFormat('Y-m-d', $request['dat'])->format('m');
+        $res->y = Carbon::createFromFormat('Y-m-d', $request['dat'])->format('Y');
+        $res->timenew = $request['time'];
         $res->other = $request['other'];
 
         $res->save();
 
-        return response()->json($data);
-    }
-
-    public function addout(Request $request)
-    {
-        $request->validate([
-            'uid' => 'required',
-            'name' => 'required',
-            'surname' => 'required',
-            'dat' => 'required',
-            'timeout' => 'required'
+        return response()->json([
+            'message' => 'แก้ไขข้อมูลเรียบร้อย'
         ]);
-
-        $d = Carbon::createFromFormat('Y-m-d', $request['dat'])->format('d');
-        $m = Carbon::createFromFormat('Y-m-d', $request['dat'])->format('m');
-        $y = Carbon::createFromFormat('Y-m-d', $request['dat'])->format('Y');
-
-        $data = new Checkout();
-
-        $data->uid = $request['uid'];
-        $data->name = $request['name'];
-        $data->surname = $request['surname'];
-        $data->local = null;
-        $data->dat = $request['dat'];
-        $data->d = $d;
-        $data->m = $m;
-        $data->y = $y;
-        $data->timeout = $request['timeout'];
-        $data->otherout = $request['other'];
-        $data->created = Auth::user()->name . ' ' . Auth::user()->surname;
-
-        $data->save();
-
-        // บันทึกลง table Record ก่อน
-        $res = new Record();
-        $res->ref_id = null;
-        $res->type = 2;
-        $res->created_by = Auth::user()->name . ' ' . Auth::user()->surname;
-        $res->uid = $request['uid'];
-        $res->pic = null;
-        $res->name = $request['name'];
-        $res->surname = $request['surname'];
-        $res->local = 'arec';
-        $res->dat = $request['dat'];
-        $res->d = $d;
-        $res->m = $m;
-        $res->y = $y;
-        $res->timetype = 'ออกงาน';
-        $res->timeold = null;
-        $res->timenew = $request['timeout'];
-        $res->other = $request['other'];
-
-        $res->save();
-
-        return response()->json($data);
     }
 
     /**
@@ -152,13 +96,6 @@ class AddController extends Controller
     public function show(string $id)
     {
         //
-    }
-
-    public function showname(string $uid)
-    {
-        $data = Member::where('uid', $uid)->first();
-
-        return response()->json($data);
     }
 
     /**

@@ -100,12 +100,20 @@
                                         <td
                                             class="whitespace-nowrap border-r px-6 py-2"
                                         >
-                                            {{ moment(record.created_at).add(543, "years").format('L') }}
+                                            {{
+                                                moment(record.created_at)
+                                                    .add(543, "years")
+                                                    .format("L")
+                                            }}
                                         </td>
                                         <td
                                             class="whitespace-nowrap border-r px-6 py-2"
                                         >
-                                            {{ moment(record.created_at).format('LTS') }}
+                                            {{
+                                                moment(
+                                                    record.created_at
+                                                ).format("LTS")
+                                            }}
                                             น.
                                         </td>
                                         <td
@@ -135,14 +143,31 @@
                                         <td
                                             class="whitespace-nowrap border-r px-6 py-2"
                                         >
-                                            {{ moment(record.dat).format('L') }}
+                                            {{ moment(record.dat).format("L") }}
                                         </td>
                                         <td
                                             class="whitespace-nowrap border-r px-6 py-2"
                                         >
                                             <p
-                                            :class="record.type === 1 ? 'text-sky-500' : 'text-orange-400'"
-                                            >{{ record.timetype }}</p>
+                                                class=""
+                                                :class="
+                                                    record.type === 1
+                                                        ? 'text-sky-500'
+                                                        : record.type === 2
+                                                        ? 'text-orange-400'
+                                                        : 'text-green-600'
+                                                "
+                                            >
+                                                <font v-if="record.type === 1"
+                                                    >เข้างาน</font
+                                                >
+                                                <font v-else-if="record.type === 2"
+                                                    >vvdงาน</font
+                                                >
+                                                <font v-else
+                                                    >เพิ่มข้อมูล</font
+                                                >
+                                            </p>
                                         </td>
                                         <td
                                             class="whitespace-nowrap border-r px-6 py-2"
@@ -212,7 +237,7 @@ export default {
         return {
             path: "/storage/img",
             recordList: [],
-            moment: moment
+            moment: moment,
         };
     },
     methods: {

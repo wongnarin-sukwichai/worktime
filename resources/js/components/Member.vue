@@ -145,7 +145,11 @@
                                         <td
                                             class="whitespace-nowrap border-r px-6 py-2"
                                         >
-                                            {{ moment(report.dat).format("L") }}
+                                            {{
+                                                moment(report.dat)
+                                                    .add(543, "years")
+                                                    .format("L")
+                                            }}
                                         </td>
                                         <td
                                             class="whitespace-nowrap border-r px-6 py-2"
@@ -180,22 +184,21 @@
                                             </a>
                                         </td>
                                         <td
-                                                class="whitespace-nowrap border-r px-6 py-2"
-                                                :class="
+                                            class="whitespace-nowrap border-r px-6 py-2"
+                                            :class="
+                                                report.timein > this.timer
+                                                    ? 'bg-red-300'
+                                                    : 'bg-gray-0'
+                                            "
+                                        >
+                                            <span
+                                                class="text-white"
+                                                v-if="
                                                     report.timein > this.timer
-                                                        ? 'bg-red-300'
-                                                        : 'bg-gray-0'
                                                 "
+                                                >มาสาย</span
                                             >
-                                                <span
-                                                    class="text-white"
-                                                    v-if="
-                                                        report.timein >
-                                                        this.timer
-                                                    "
-                                                    >มาสาย</span
-                                                >
-                                            </td>
+                                        </td>
                                         <td
                                             class="whitespace-nowrap border-r px-6 py-2"
                                         >
@@ -254,6 +257,7 @@ import "boxicons";
 import Datepicker from "vue3-datepicker";
 import moment from "moment";
 import axios from "axios";
+import Swal from "sweetalert2";
 
 export default {
     mounted() {
@@ -279,15 +283,23 @@ export default {
     },
     methods: {
         async search() {
-            this.report.selected = moment(this.picked)
-                .add(543, "years")
-                .format("YYYY-MM-DD");
-            // console.log(this.selected)
-            try {
-                await this.$store.dispatch("reportMember", this.report);
-                this.showMemberList = this.$store.getters.reportMember;
-            } catch (err) {
-                console.log(err);
+            if (this.report.uid == "") {
+                Swal.fire({
+                    title: "ไม่มีข้อมูล",
+                    text: "กรุณาเลือกบุคลากรที่ต้องการ",
+                    icon: "error",
+                });
+            } else {
+                this.report.selected = moment(this.picked)
+                    // .add(543, "years")
+                    .format("YYYY-MM-DD");
+                // console.log(this.selected)
+                try {
+                    await this.$store.dispatch("reportMember", this.report);
+                    this.showMemberList = this.$store.getters.reportMember;
+                } catch (err) {
+                    console.log(err);
+                }
             }
         },
         getMember() {

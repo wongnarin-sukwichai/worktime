@@ -7,7 +7,7 @@
                 >
                     <div>
                         <div id="digit_clock_date" class="font-semibold"></div>
-                        <p class="text-gray-300 text-4xl">ว/ด/ป</p>
+                        <p class="text-gray-300 text-4xl mb-8">ว/ด/ป</p>
                     </div>
                 </div>
 
@@ -26,17 +26,64 @@
                     class="space-x-8 flex justify-between mt-32 md:mt-0 md:justify-center"
                 >
                     <router-link
-                        class="rounded-full bg-sky-300 px-8 py-4 text-gray-50 hover:bg-sky-400 text-4xl"
+                        class="rounded-full bg-sky-300 px-8 py-8 text-gray-50 hover:bg-sky-400 text-4xl"
                         to="/"
                     >
                         เข้างาน
                     </router-link>
                     <router-link
-                        class="rounded-full px-8 py-4 text-orange-300 outline outline-offset-0 outline-1 outline-orange-300 hover:bg-orange-300 hover:text-gray-50 text-4xl"
+                        class="rounded-full px-8 py-8 text-orange-300 outline outline-offset-0 outline-1 outline-orange-300 hover:bg-orange-300 hover:text-gray-50 text-4xl"
                         to="checkout"
                     >
                         ออกงาน
                     </router-link>
+                </div>
+
+                <div class="absolute mt-20">
+                    <div class="flex py-2">
+                        <div class="border-dotted border-2 rounded-lg p-2">
+                            1
+                        </div>
+                        <div class="border-dotted border-2 rounded-lg p-2 ml-2">
+                            วงศ์นรินทร์ สุขวิชัย
+                        </div>
+                        <div class="border-dotted border-2 rounded-lg p-2 ml-2">
+                            08:30:00
+                        </div>
+                    </div>
+                    <div class="flex py-2">
+                        <div class="border-dotted border-2 rounded-lg p-2">
+                            1
+                        </div>
+                        <div class="border-dotted border-2 rounded-lg p-2 ml-2">
+                            วงศ์นรินทร์ สุขวิชัย
+                        </div>
+                        <div class="border-dotted border-2 rounded-lg p-2 ml-2">
+                            08:30:00
+                        </div>
+                    </div>
+                    <div class="flex py-2">
+                        <div class="border-dotted border-2 rounded-lg p-2">
+                            1
+                        </div>
+                        <div class="border-dotted border-2 rounded-lg p-2 ml-2">
+                            วงศ์นรินทร์ สุขวิชัย
+                        </div>
+                        <div class="border-dotted border-2 rounded-lg p-2 ml-2">
+                            08:30:00
+                        </div>
+                    </div>
+                    <div class="flex py-2">
+                        <div class="border-dotted border-2 rounded-lg p-2">
+                            1
+                        </div>
+                        <div class="border-dotted border-2 rounded-lg p-2 ml-2">
+                            วงศ์นรินทร์ สุขวิชัย
+                        </div>
+                        <div class="border-dotted border-2 rounded-lg p-2 ml-2">
+                            08:30:00
+                        </div>
+                    </div>
                 </div>
             </div>
 
@@ -60,10 +107,14 @@
                         :width="80"
                         :height="80"
                     ></canvas>
-                    <p class="px-3 pt-5 ml-2 border rounded-full shadow-lg text-2xl">
+                    <p
+                        class="px-3 pt-5 ml-2 border rounded-full shadow-lg text-2xl"
+                    >
                         {{ this.profile }}
                     </p>
-                    <p class="px-3 pt-5 ml-2 border rounded-full shadow-lg text-2xl">
+                    <p
+                        class="px-3 pt-5 ml-2 border rounded-full shadow-lg text-2xl"
+                    >
                         {{ this.timein }}
                     </p>
                 </div>

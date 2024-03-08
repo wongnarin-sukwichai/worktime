@@ -25,7 +25,6 @@ return new class extends Migration
             $table->string('d');
             $table->string('m');
             $table->string('y');
-            $table->string('timetype');
             $table->string('timeold')->nullable();
             $table->string('timenew');
             $table->string('other')->nullable();
